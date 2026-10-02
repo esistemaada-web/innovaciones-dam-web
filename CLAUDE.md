@@ -29,7 +29,7 @@ forzar (nada de `push --force` sin permiso explícito).
 
 - Sitio estático sin build: los cambios de contenido o diseño se hacen directo
   en `index.html` (HTML + CSS + JS inline, sin frameworks).
-- Datos de contacto en la página: WhatsApp **+34 623 328 599**, correo
+- Datos de contacto en la página: WhatsApp **+58 424 567 3867**, correo
   **esistemaada@gmail.com**. Si cambian, actualizar los enlaces `wa.me` y
   `mailto:` en `index.html` y este archivo.
 - El usuario escribe en español → responder en español.

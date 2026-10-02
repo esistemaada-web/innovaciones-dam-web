@@ -18,9 +18,10 @@
     --fg: #101826;
     --muted: #54657a;
     --border: #d9e1ea;
-    --accent: #0a6e73;
+    --accent: #1f4068;
+    --accent-2: #9c3030;
     --accent-fg: #ffffff;
-    --mono-chip: #eef4f3;
+    --mono-chip: #eef1f5;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
@@ -30,7 +31,8 @@
       --fg: #eaf0f6;
       --muted: #93a4b8;
       --border: #24334a;
-      --accent: #3ec7c0;
+      --accent: #6fa3d8;
+      --accent-2: #e2776f;
       --accent-fg: #0b1420;
       --mono-chip: #16293099;
       color-scheme: dark;
@@ -42,7 +44,8 @@
     --fg: #eaf0f6;
     --muted: #93a4b8;
     --border: #24334a;
-    --accent: #3ec7c0;
+    --accent: #6fa3d8;
+    --accent-2: #e2776f;
     --accent-fg: #0b1420;
     --mono-chip: #16293099;
     color-scheme: dark;
@@ -151,6 +154,9 @@
   .sub-card .sys-name { font-weight: 700; display: flex; align-items: baseline; gap: 8px; }
   .sub-card .sys-name code { font-size: .85em; color: var(--accent); }
   .sub-card p { color: var(--muted); font-size: .9rem; margin: 8px 0 0; }
+
+  .sub-card-iada { border-top: 3px solid var(--accent-2); padding-top: 14px; }
+  .iada-art { display: block; width: 100%; border-radius: 6px; }
   .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .chip {
     font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .78rem;
@@ -158,6 +164,7 @@
     padding: 5px 10px; border-radius: 6px;
   }
   .chip b { color: var(--accent); }
+  .chip:first-child b { color: var(--accent-2); }
 
   .contact-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
@@ -267,8 +274,8 @@
               operaciones de tu negocio en un solo lugar.
             </p>
           </div>
-          <div class="sub-card">
-            <div class="sys-name"><code>02</code> Sistema iADA</div>
+          <div class="sub-card sub-card-iada">
+            <img class="iada-art" src="assets/logo-iada.png" alt="iADA — Inteligencia Artificial ADA, Sistema Administrativo">
             <p>La capa inteligente de ADA, con capacidades de IA sobre tus propios datos.</p>
             <div class="chip-row">
               <span class="chip"><b>RAG</b> — respuestas basadas en tus documentos</span>

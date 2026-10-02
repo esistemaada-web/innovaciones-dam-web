@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Innovaciones DAM</title>
+<meta name="description" content="Innovaciones DAM: digitalización, automatización y sistemas informáticos — Sistema ADA y Sistema iADA.">
+<style>
+  /*
+    Layout: header fijo arriba; hero centrado; 3 pilares de servicio en grid que
+    colapsa a 1 columna en móvil; Sistemas Informáticos despliega ADA/iADA como
+    sub-tarjetas con las capacidades de iADA (RAG, Reportes) como "tags" de código.
+  */
+  :root {
+    --bg: #f5f7fa;
+    --surface: #ffffff;
+    --fg: #101826;
+    --muted: #54657a;
+    --border: #d9e1ea;
+    --accent: #0a6e73;
+    --accent-fg: #ffffff;
+    --mono-chip: #eef4f3;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1420;
+      --surface: #121d2c;
+      --fg: #eaf0f6;
+      --muted: #93a4b8;
+      --border: #24334a;
+      --accent: #3ec7c0;
+      --accent-fg: #0b1420;
+      --mono-chip: #16293099;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1420;
+    --surface: #121d2c;
+    --fg: #eaf0f6;
+    --muted: #93a4b8;
+    --border: #24334a;
+    --accent: #3ec7c0;
+    --accent-fg: #0b1420;
+    --mono-chip: #16293099;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: "Manrope", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  a { color: var(--accent); }
+  img { max-width: 100%; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+
+  header.site {
+    position: sticky; top: env(safe-area-inset-top, 0px);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+  header.site .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-block: 16px; gap: 16px;
+  }
+  .brand { display: flex; flex-direction: column; gap: 2px; }
+  .brand .name { font-weight: 700; font-size: 1.05rem; letter-spacing: .01em; }
+  .brand .tag { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  nav.site-nav { display: flex; gap: 20px; }
+  nav.site-nav a { color: var(--fg); text-decoration: none; font-size: .92rem; font-weight: 600; }
+  nav.site-nav a:hover { color: var(--accent); }
+
+  .hero { padding-block: 72px 56px; }
+  .hero .eyebrow {
+    font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 14px;
+  }
+  .hero h1 { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 700; max-width: 18ch; }
+  .hero p.lead { margin-top: 18px; max-width: 54ch; color: var(--muted); font-size: 1.08rem; }
+  .hero .cta-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 8px; font-weight: 700; font-size: .95rem;
+    text-decoration: none; border: 1px solid transparent; cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-fg); }
+  .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  section { padding-block: 40px; }
+  .section-head { margin-bottom: 30px; max-width: 56ch; }
+  .section-head .eyebrow {
+    font-size: .76rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 10px;
+  }
+  .section-head h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+  .section-head p { color: var(--muted); margin-top: 10px; }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0;
+  }
+  .card .kicker { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .card h3 { font-size: 1.18rem; }
+  .card p { color: var(--muted); margin: 0; font-size: .95rem; }
+
+  .systems-card { grid-column: 1 / -1; }
+  @media (max-width: 860px) { .systems-card { grid-column: auto; } }
+  .systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  @media (max-width: 640px) { .systems-grid { grid-template-columns: 1fr; } }
+
+  .sub-card {
+    border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+    background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%);
+    min-width: 0;
+  }
+  .sub-card .sys-name { font-weight: 700; display: flex; align-items: baseline; gap: 8px; }
+  .sub-card .sys-name code { font-size: .85em; color: var(--accent); }
+  .sub-card p { color: var(--muted); font-size: .9rem; margin: 8px 0 0; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .78rem;
+    background: var(--mono-chip); border: 1px solid var(--border); color: var(--fg);
+    padding: 5px 10px; border-radius: 6px;
+  }
+  .chip b { color: var(--accent); }
+
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .email-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: var(--bg); border: 1px dashed var(--border); border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .email-row .mono { font-size: .98rem; }
+  .copy-btn {
+    border: 1px solid var(--border); background: transparent; color: var(--fg);
+    border-radius: 6px; padding: 6px 10px; font-size: .82rem; font-weight: 600; cursor: pointer;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .copy-btn[data-copied="1"] { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border); padding-block: 24px; margin-top: 20px;
+    color: var(--muted); font-size: .85rem;
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card, .sub-card { transition: border-color .15s ease; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <div class="brand">
+      <span class="name">Innovaciones DAM</span>
+      <span class="tag mono">Sistema ADA</span>
+    </div>
+    <nav class="site-nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Digitalización · Automatización · Sistemas</div>
+    <h1>Tecnología que ordena y hace crecer tu negocio.</h1>
+    <p class="lead">
+      En Innovaciones DAM digitalizamos procesos, automatizamos tareas repetitivas
+      y construimos los sistemas informáticos que sostienen tu operación —
+      incluido <code>Sistema ADA</code>, nuestra plataforma propia, y su capa
+      inteligente <code>iADA</code>.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contacto">Hablar sobre mi negocio</a>
+      <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="section-head">
+      <div class="eyebrow">Qué hacemos</div>
+      <h2>Tres frentes, un mismo objetivo</h2>
+      <p>Menos trabajo manual, información ordenada y decisiones más rápidas.</p>
+    </div>
+
+    <div class="pillars">
+      <article class="card">
+        <span class="kicker">01 — Procesos</span>
+        <h3>Digitalización</h3>
+        <p>
+          Pasamos tus procesos de papel, planillas sueltas y WhatsApp a flujos
+          digitales ordenados, trazables y accesibles desde cualquier lugar.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="kicker">02 — Tareas</span>
+        <h3>Automatización</h3>
+        <p>
+          Identificamos las tareas repetitivas de tu día a día y las
+          automatizamos: menos errores manuales y más horas para lo que de
+          verdad necesita tu atención.
+        </p>
+      </article>
+
+      <article class="card systems-card">
+        <span class="kicker">03 — Plataforma</span>
+        <h3>Sistemas Informáticos</h3>
+        <p>
+          Diseñamos y mantenemos el sistema que necesita tu negocio para
+          operar. Dos capas, un mismo sistema:
+        </p>
+
+        <div class="systems-grid">
+          <div class="sub-card">
+            <div class="sys-name"><code>01</code> Sistema ADA</div>
+            <p>
+              Plataforma base de gestión: ordena la información y las
+              operaciones de tu negocio en un solo lugar.
+            </p>
+          </div>
+          <div class="sub-card">
+            <div class="sys-name"><code>02</code> Sistema iADA</div>
+            <p>La capa inteligente de ADA, con capacidades de IA sobre tus propios datos.</p>
+            <div class="chip-row">
+              <span class="chip"><b>RAG</b> — respuestas basadas en tus documentos</span>
+              <span class="chip"><b>Reportes Personalizados</b> — informes a medida y automáticos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="section-head">
+      <div class="eyebrow">Hablemos</div>
+      <h2>¿Conversamos sobre tu negocio?</h2>
+      <p>Escríbenos y te contamos cómo aplicar esto a tu caso puntual.</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="email-row">
+        <span class="mono" id="email-text">esistemaada@gmail.com</span>
+        <button class="copy-btn" id="copy-email" type="button">Copiar correo</button>
+      </div>
+      <div class="cta-row" style="margin-top:0">
+        <a class="btn btn-primary" href="https://wa.me/34623328599?text=Hola%2C%20quiero%20consultar%20sobre%20sus%20servicios" target="_blank" rel="noopener">
+          Escribir por WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="mailto:esistemaada@gmail.com?subject=Consulta%20desde%20la%20p%C3%A1gina">
+          Escribir correo
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Innovaciones DAM</span>
+    <span class="mono">Sistema ADA · Sistema iADA</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var btn = document.getElementById("copy-email");
+    var email = document.getElementById("email-text").textContent.trim();
+    btn.addEventListener("click", function () {
+      function done() {
+        btn.textContent = "¡Copiado!";
+        btn.setAttribute("data-copied", "1");
+        setTimeout(function () {
+          btn.textContent = "Copiar correo";
+          btn.removeAttribute("data-copied");
+        }, 1800);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(done).catch(function () {
+          selectText();
+        });
+      } else {
+        selectText();
+      }
+      function selectText() {
+        var el = document.getElementById("email-text");
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    });
+  })();
+</script>
+</body>
+</html>

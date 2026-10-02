@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Innovaciones DAM</title>
 <meta name="description" content="Innovaciones DAM: digitalización, automatización y sistemas informáticos — Sistema ADA y Sistema iADA.">
+<link rel="icon" href="assets/logo.jpg">
 <style>
   /*
     Layout: header fijo arriba; hero centrado; 3 pilares de servicio en grid que
@@ -75,7 +76,13 @@
     display: flex; align-items: center; justify-content: space-between;
     padding-block: 16px; gap: 16px;
   }
-  .brand { display: flex; flex-direction: column; gap: 2px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand .logo {
+    height: 44px; width: 44px; object-fit: contain;
+    background: #fff; border-radius: 8px; padding: 3px;
+    border: 1px solid var(--border);
+  }
+  .brand .brand-text { display: flex; flex-direction: column; gap: 2px; }
   .brand .name { font-weight: 700; font-size: 1.05rem; letter-spacing: .01em; }
   .brand .tag { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   nav.site-nav { display: flex; gap: 20px; }
@@ -177,8 +184,11 @@
 <header class="site">
   <div class="wrap bar">
     <div class="brand">
-      <span class="name">Innovaciones DAM</span>
-      <span class="tag mono">Sistema ADA</span>
+      <img class="logo" src="assets/logo.jpg" alt="Innovaciones DAM">
+      <div class="brand-text">
+        <span class="name">Innovaciones DAM</span>
+        <span class="tag mono">Sistema ADA</span>
+      </div>
     </div>
     <nav class="site-nav">
       <a href="#servicios">Servicios</a>

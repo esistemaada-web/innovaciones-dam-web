@@ -130,8 +130,9 @@
     padding: 10px;
   }
 
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } }
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 1040px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .pillars { grid-template-columns: 1fr; } }
 
   .card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
@@ -142,7 +143,7 @@
   .card p { color: var(--muted); margin: 0; font-size: .95rem; }
 
   .systems-card { grid-column: 1 / -1; }
-  @media (max-width: 860px) { .systems-card { grid-column: auto; } }
+  @media (max-width: 560px) { .systems-card { grid-column: auto; } }
   .systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
   @media (max-width: 640px) { .systems-grid { grid-template-columns: 1fr; } }
 
@@ -217,7 +218,7 @@
 
 <main class="wrap">
   <section class="hero">
-    <div class="eyebrow">Digitalización · Automatización · Sistemas</div>
+    <div class="eyebrow">Digitalización · Automatización · Redes Sociales · Sistemas</div>
     <h1>Tecnología que ordena y hace crecer tu negocio.</h1>
     <p class="lead">
       En Innovaciones DAM digitalizamos procesos, automatizamos tareas repetitivas
@@ -234,8 +235,8 @@
   <section id="servicios">
     <div class="section-head">
       <div class="eyebrow">Qué hacemos</div>
-      <h2>Tres frentes, un mismo objetivo</h2>
-      <p>Menos trabajo manual, información ordenada y decisiones más rápidas.</p>
+      <h2>Cuatro frentes, un mismo objetivo</h2>
+      <p>Menos trabajo manual, información ordenada, más clientes y decisiones más rápidas.</p>
     </div>
 
     <div class="pillars">
@@ -258,8 +259,18 @@
         </p>
       </article>
 
+      <article class="card">
+        <span class="kicker">03 — Visibilidad</span>
+        <h3>Uso de las Redes Sociales</h3>
+        <p>
+          Organizamos tu presencia en redes para que más gente te encuentre:
+          contenido constante y bien enfocado para mejorar la demanda de tus
+          productos o servicios.
+        </p>
+      </article>
+
       <article class="card systems-card">
-        <span class="kicker">03 — Plataforma</span>
+        <span class="kicker">04 — Plataforma</span>
         <h3>Sistemas Informáticos</h3>
         <p>
           Diseñamos y mantenemos el sistema que necesita tu negocio para

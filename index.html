@@ -119,16 +119,16 @@
   .section-head h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
   .section-head p { color: var(--muted); margin-top: 10px; }
 
-  .section-head-split {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 20px; flex-wrap: wrap;
+  .contact-row {
+    display: flex; align-items: stretch; gap: 20px; flex-wrap: wrap;
   }
   .group-badge { flex-shrink: 0; }
   .group-badge img {
-    height: 210px; width: auto; max-width: 55vw; object-fit: contain;
+    height: 140px; width: 140px; object-fit: contain;
     background: #fff; border: 1px solid var(--border); border-radius: 10px;
     padding: 10px;
   }
+  .contact-row .contact-card { flex: 1; min-width: 260px; justify-content: center; }
 
   .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   @media (max-width: 1040px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
@@ -299,29 +299,30 @@
   </section>
 
   <section id="contacto">
-    <div class="section-head section-head-split">
-      <div>
-        <div class="eyebrow">Hablemos</div>
-        <h2>¿Conversamos sobre tu negocio?</h2>
-        <p>Escríbenos y te contamos cómo aplicar esto a tu caso puntual.</p>
-      </div>
+    <div class="section-head">
+      <div class="eyebrow">Hablemos</div>
+      <h2>¿Conversamos sobre tu negocio?</h2>
+      <p>Escríbenos y te contamos cómo aplicar esto a tu caso puntual.</p>
+    </div>
+
+    <div class="contact-row">
       <div class="group-badge">
         <img src="assets/logo.jpg" alt="Innovaciones DAM">
       </div>
-    </div>
 
-    <div class="contact-card">
-      <div class="email-row">
-        <span class="mono" id="email-text">esistemaada@gmail.com</span>
-        <button class="copy-btn" id="copy-email" type="button">Copiar correo</button>
-      </div>
-      <div class="cta-row" style="margin-top:0">
-        <a class="btn btn-primary" href="https://wa.me/584245673867?text=Hola%2C%20quiero%20consultar%20sobre%20sus%20servicios" target="_blank" rel="noopener">
-          Escribir por WhatsApp
-        </a>
-        <a class="btn btn-ghost" href="mailto:esistemaada@gmail.com?subject=Consulta%20desde%20la%20p%C3%A1gina">
-          Escribir correo
-        </a>
+      <div class="contact-card">
+        <div class="email-row">
+          <span class="mono" id="email-text">esistemaada@gmail.com</span>
+          <button class="copy-btn" id="copy-email" type="button">Copiar correo</button>
+        </div>
+        <div class="cta-row" style="margin-top:0">
+          <a class="btn btn-primary" href="https://wa.me/584245673867?text=Hola%2C%20quiero%20consultar%20sobre%20sus%20servicios" target="_blank" rel="noopener">
+            Escribir por WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="mailto:esistemaada@gmail.com?subject=Consulta%20desde%20la%20p%C3%A1gina">
+            Escribir correo
+          </a>
+        </div>
       </div>
     </div>
   </section>

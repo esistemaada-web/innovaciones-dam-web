@@ -9,13 +9,22 @@ desplegar en Vercel sin configuración adicional.
 
 - Digitalización
 - Automatización
+- Redes Sociales
 - Sistemas Informáticos
   - Sistema ADA
-  - Sistema iADA (RAG, Reportes Personalizados)
+  - Sistema iADA (RAG, Reportes Personalizados, App_Respaldo)
+
+## Agendar cita
+
+Sección `#agendar`: formulario (nombre, medio preferido — llamada telefónica /
+WhatsApp / videollamada —, fecha y hora) que arma un mensaje de WhatsApp con
+la solicitud. No hay backend ni calendario externo conectado; si más adelante
+se consigue un enlace de Google Calendar o Calendly, se puede reemplazar por
+un calendario embebido real.
 
 ## Contacto en la página
 
-- WhatsApp: +58 424 567 3867
+- WhatsApp: +58 424 567 3867 (variable `WA_NUMBER` en el `<script>` de `index.html`)
 - Correo: esistemaada@gmail.com
 
 ## Desarrollo local

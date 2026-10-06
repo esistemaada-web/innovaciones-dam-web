@@ -4,606 +4,430 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Innovaciones DAM</title>
-<meta name="description" content="Innovaciones DAM: digitalización, automatización y sistemas informáticos — Sistema ADA y Sistema iADA.">
-<link rel="icon" href="assets/logo.jpg">
+<meta name="description" content="Innovaciones DAM: digitalización, automatización, redes sociales y sistemas informáticos — Sistema ADA y Sistema iADA.">
+<link rel="icon" href="assets/logo-iada.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  /*
-    Layout: header fijo arriba; hero centrado; 3 pilares de servicio en grid que
-    colapsa a 1 columna en móvil; Sistemas Informáticos despliega ADA/iADA como
-    sub-tarjetas con las capacidades de iADA (RAG, Reportes) como "tags" de código.
-  */
-  :root {
-    --bg: #f5f7fa;
-    --surface: #ffffff;
-    --fg: #101826;
-    --muted: #54657a;
-    --border: #d9e1ea;
-    --accent: #1f4068;
-    --accent-2: #9c3030;
-    --accent-fg: #ffffff;
-    --success: #1f7a4d;
-    --mono-chip: #eef1f5;
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0b1420;
-      --surface: #121d2c;
-      --fg: #eaf0f6;
-      --muted: #93a4b8;
-      --border: #24334a;
-      --accent: #6fa3d8;
-      --accent-2: #e2776f;
-      --accent-fg: #0b1420;
-      --success: #5fcf96;
-      --mono-chip: #16293099;
-      color-scheme: dark;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0b1420;
-    --surface: #121d2c;
-    --fg: #eaf0f6;
-    --muted: #93a4b8;
-    --border: #24334a;
-    --accent: #6fa3d8;
-    --accent-2: #e2776f;
-    --accent-fg: #0b1420;
-    --success: #5fcf96;
-    --mono-chip: #16293099;
-    color-scheme: dark;
-  }
+/* Layout: mobile-first, una columna con CTA siempre a la vista (barra fija abajo);
+   en escritorio el hero se divide en texto + mockup de laptop y celular. */
+:root{
+  --bg:#F4F7FB; --surface:#FFFFFF; --fg:#0D1B2E; --muted:#475A72; --line:#D5DFEA;
+  --blue:#0F6BB5; --blue-ink:#0B4F87; --red:#CF2D2A; --wa:#0F7A3D; --wa-fg:#FFFFFF;
+  --band:#0B2540; --band-fg:#EAF1F8; --panel:#0F5C9E; --panel-fg:#FFFFFF;
+  --wood:#2E1B11; --wood-fg:#F0E3D4; --wood-line:#5A3A26; --tint:#E3EEF8;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1320; --surface:#101D2E; --fg:#E7EEF6; --muted:#9DB0C5; --line:#22364C;
+  --blue:#4DA3E8; --blue-ink:#7DBCF0; --red:#F06661; --wa:#1E9A52; --wa-fg:#04140A;
+  --band:#06101C; --band-fg:#DCE8F4; --panel:#123F68; --panel-fg:#FFFFFF;
+  --wood:#1B100A; --wood-fg:#EBDCCB; --wood-line:#4A2F1E; --tint:#12263B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1320; --surface:#101D2E; --fg:#E7EEF6; --muted:#9DB0C5; --line:#22364C;
+  --blue:#4DA3E8; --blue-ink:#7DBCF0; --red:#F06661; --wa:#1E9A52; --wa-fg:#04140A;
+  --band:#06101C; --band-fg:#DCE8F4; --panel:#123F68; --panel-fg:#FFFFFF;
+  --wood:#1B100A; --wood-fg:#EBDCCB; --wood-line:#4A2F1E; --tint:#12263B; color-scheme:dark}
 
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3 { font-family: "Manrope", system-ui, sans-serif; text-wrap: balance; margin: 0; }
-  code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
-  a { color: var(--accent); }
-  img { max-width: 100%; }
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:0;padding-block-end:84px}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:1120px;margin-inline:auto;padding-inline:18px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-ink);font-weight:500}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.015em}
+h1{font-weight:800;font-size:clamp(1.95rem,7.2vw,3.35rem);line-height:1.06}
+h2{font-weight:800;font-size:clamp(1.6rem,5vw,2.4rem);line-height:1.12}
+h3{font-weight:600;font-size:1.25rem;line-height:1.2}
+p{margin:0}
 
-  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:12px;font:600 1rem/1 var(--f-body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-wa{background:var(--wa);color:var(--wa-fg)}
+.btn-ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn-block{width:100%}
 
-  header.site {
-    position: sticky; top: env(safe-area-inset-top, 0px);
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    z-index: 10;
-  }
-  header.site .bar {
-    display: flex; align-items: center; justify-content: space-between;
-    padding-block: 16px; gap: 16px;
-  }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand .logo {
-    height: 52px; width: auto; object-fit: contain;
-    background: #fff; border-radius: 8px; padding: 4px 10px;
-    border: 1px solid var(--border);
-  }
-  .brand .brand-text { display: flex; flex-direction: column; gap: 2px; }
-  .brand .name { font-weight: 700; font-size: 1.05rem; letter-spacing: .01em; }
-  .brand .tag { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .brand .tag .tag-ia { color: var(--accent-2); font-weight: 700; }
-  nav.site-nav { display: flex; gap: 20px; }
-  nav.site-nav a { color: var(--fg); text-decoration: none; font-size: .92rem; font-weight: 600; }
-  nav.site-nav a:hover { color: var(--accent); }
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.brand img{height:42px;width:auto;border-radius:8px;border:1px solid var(--line)}
+.brand b{font-family:var(--f-display);font-size:1.05rem;display:block;line-height:1.1}
+.brand span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;display:block}
+.top nav{display:flex;gap:18px;font-weight:600;font-size:.95rem}
+.top nav a{text-decoration:none;padding:10px 2px}
+.top nav a:hover{color:var(--blue-ink)}
+@media(max-width:430px){.brand span{display:none}}
 
-  .hero { padding-block: 72px 40px; }
-  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
-  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero .eyebrow {
-    font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 14px;
-  }
-  .hero h1 { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 700; max-width: 18ch; }
-  .hero p.lead { margin-top: 18px; max-width: 54ch; color: var(--muted); font-size: 1.08rem; }
-  .hero p.lead strong { color: var(--fg); }
-  .hero .cta-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-  .trust-line {
-    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
-    color: var(--muted); font-size: .92rem; max-width: 68ch;
-  }
-  .trust-line strong { color: var(--fg); }
+/* Hero */
+.hero{padding-block:34px 44px;background-image:radial-gradient(var(--line) 1px,transparent 1.2px);background-size:22px 22px;background-position:0 0}
+.hero .wrap{display:grid;gap:34px;align-items:center}
+.hero-copy{display:grid;gap:20px;min-width:0}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero .sub{font-size:1.08rem;color:var(--muted);max-width:56ch}
+.hero .sub b{color:var(--fg);font-weight:600}
+.cta-row{display:grid;gap:12px;justify-items:start}
+.cta-row .btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.cta-row small{font-size:.9rem;color:var(--muted)}
+@media(min-width:900px){
+  .hero{padding-block:64px 72px}
+  .hero .wrap{grid-template-columns:1.05fr .95fr;gap:48px}
+}
 
-  .hero-visual { display: flex; flex-direction: column; }
-  .device-stage { position: relative; margin-bottom: 56px; }
-  @media (max-width: 640px) { .device-stage { margin-bottom: 14px; } }
+/* Mockup laptop + celular (datos de ejemplo) */
+.stage{container-type:inline-size;position:relative;width:100%;max-width:600px;margin-inline:auto;aspect-ratio:600/470;min-width:0}
+.laptop{position:absolute;left:0;top:2%;width:84%}
+.lid{background:#16202D;border-radius:2.2cqw 2.2cqw .8cqw .8cqw;padding:1.4cqw 1.4cqw 1.8cqw;box-shadow:0 2.4cqw 5cqw -1.5cqw rgba(8,20,36,.45)}
+.screen{background:var(--surface);border-radius:1cqw;aspect-ratio:16/10;overflow:hidden;font-size:max(7px,2.05cqw);line-height:1.3;display:flex;flex-direction:column;color:var(--fg)}
+.s-bar{display:flex;align-items:center;gap:1cqw;padding:1.2cqw 1.8cqw;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.9em;color:var(--muted)}
+.s-bar i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:var(--line);flex:none}
+.s-bar span{margin-left:1cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-body{padding:2cqw 2.2cqw;display:grid;gap:1.8cqw;flex:1;min-height:0;align-content:start}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw}
+.kpi{background:var(--tint);border-radius:.9cqw;padding:1.2cqw 1.5cqw}
+.kpi small{display:block;font-size:.8em;color:var(--muted)}
+.kpi b{font-family:var(--f-display);font-size:1.9em;font-weight:800;line-height:1.1}
+.chart{display:flex;align-items:flex-end;gap:1.3cqw;height:11cqw;border-bottom:1px solid var(--line);padding-inline:.5cqw}
+.chart i{flex:1;background:var(--blue);border-radius:.5cqw .5cqw 0 0;opacity:.88}
+.chart i:nth-child(6){background:var(--red);opacity:1}
+.s-foot{font-family:var(--f-mono);font-size:.82em;color:var(--muted)}
+.base{height:1.8cqw;background:linear-gradient(#C9D2DC,#9AA7B6);border-radius:0 0 2.6cqw 2.6cqw;margin-inline:-3%}
+.phone{position:absolute;right:0;bottom:0;width:31%;background:#16202D;border-radius:4.4cqw;padding:1.1cqw;box-shadow:0 3cqw 6cqw -2cqw rgba(8,20,36,.55)}
+.ph-screen{background:var(--surface);border-radius:3.4cqw;aspect-ratio:9/18.5;padding:3cqw 2.4cqw;display:flex;flex-direction:column;gap:2cqw;font-size:max(6.5px,1.9cqw);line-height:1.25;color:var(--fg);overflow:hidden}
+.ph-title{font-family:var(--f-mono);font-weight:500;color:var(--muted);font-size:.95em;text-align:center}
+.ph-ok{display:grid;place-items:center;width:9cqw;height:9cqw;margin:1cqw auto 0;border-radius:50%;background:var(--wa);color:var(--wa-fg)}
+.ph-ok svg{width:55%;height:55%}
+.ph-msg{text-align:center;font-weight:600;font-size:1.05em}
+.ph-row{background:var(--tint);border-radius:1.2cqw;padding:1.3cqw 1.6cqw}
+.ph-row small{display:block;color:var(--muted);font-size:.85em}
+.ph-btn{margin-top:auto;background:var(--blue);color:#fff;border-radius:1.4cqw;text-align:center;padding:1.7cqw 0;font-weight:600}
+.stage-note{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
 
-  .device-laptop {
-    background: var(--surface); border: 2px solid var(--fg); border-radius: 12px;
-    overflow: hidden; box-shadow: 0 16px 32px rgba(10, 20, 35, .14);
-  }
-  .device-bar {
-    display: flex; align-items: center; gap: 6px;
-    padding: 9px 12px; border-bottom: 1px solid var(--border);
-  }
-  .device-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
-  .device-bar .device-title {
-    margin-left: 6px; font-size: .72rem; font-weight: 700; color: var(--muted);
-  }
-  .device-screen { padding: 16px 18px 18px; }
+/* Autoridad */
+.proof{background:var(--band);color:var(--band-fg)}
+.proof .wrap{display:grid;gap:6px;padding-block:22px}
+.proof p{font-family:var(--f-display);font-weight:600;font-size:clamp(1.1rem,3.4vw,1.5rem);line-height:1.3;text-wrap:balance}
+.proof p span{color:#8EC8F5}
+.proof small{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;opacity:.7}
 
-  .stat-row { display: flex; gap: 10px; }
-  .stat-tile { flex: 1; text-align: center; min-width: 0; }
-  .stat-tile .num {
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 1.3rem; font-weight: 700;
-    font-variant-numeric: tabular-nums; color: var(--fg); display: block;
-  }
-  .stat-tile .label { font-size: .64rem; color: var(--muted); margin-top: 2px; }
+/* Qué hacemos */
+.services{padding-block:64px 24px}
+.sec-head{display:grid;gap:12px;margin-bottom:26px;max-width:62ch}
+.sec-head p{color:var(--muted);font-size:1.05rem}
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 18px 18px;margin-inline:-18px;scroll-padding-inline:18px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.card{flex:0 0 min(82%,320px);scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 20px 24px;display:grid;gap:12px;align-content:start;min-width:0}
+.card .ico{width:46px;height:46px;border-radius:12px;background:var(--tint);color:var(--blue);display:grid;place-items:center}
+.card .ico svg{width:26px;height:26px}
+.card p{color:var(--muted)}
+.card.plat{border-color:var(--blue)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--f-mono);font-size:11.5px;padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.chips span:first-child{border-color:var(--red);color:var(--red)}
+.dots{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:2px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
+.dots i.on{background:var(--blue);width:22px;border-radius:6px}
+.hint{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px}
+@media(min-width:900px){
+  .rail{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible;padding-inline:0;margin-inline:0}
+  .card{flex:none}
+  .dots,.hint{display:none}
+}
 
-  .mini-chart { display: flex; align-items: flex-end; gap: 6px; height: 48px; margin-top: 16px; }
-  .mini-chart span { flex: 1; background: var(--accent); border-radius: 3px 3px 0 0; }
-  .mini-chart span.hot { background: var(--accent-2); }
+/* Agenda */
+.agenda{padding-block:24px 64px}
+.booking{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;display:grid;gap:16px}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.booking-grid{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;font-size:.85rem;color:var(--muted);font-weight:600}
+.field input,.field select,.field textarea{font:inherit;font-size:.95rem;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.field-note{font-size:.8rem;color:var(--muted);margin:0}
+.booking-status{font-size:.85rem;color:var(--blue-ink);font-weight:600;margin:0}
 
-  .panel-caption { font-size: .72rem; color: var(--muted); margin-top: 12px; }
+/* Cierre */
+.close{padding-block:48px 64px}
+.panel{background:var(--panel);color:var(--panel-fg);border-radius:24px;padding:34px 22px;display:grid;gap:22px}
+.panel h2{max-width:20ch}
+.panel p.lead{font-size:1.1rem;max-width:52ch;opacity:.95}
+.panel .btns{display:grid;gap:12px}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px dashed rgba(255,255,255,.45);border-radius:12px;padding:12px 14px}
+.mail code{font-family:var(--f-mono);font-size:.95rem;overflow-wrap:anywhere;user-select:all;min-width:0}
+.mail button{font:600 .85rem var(--f-body);background:#fff;color:#0B2540;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.panel .btn-ghost{color:#fff}
+@media(min-width:700px){
+  .panel{padding:52px 48px}
+  .panel .btns{grid-template-columns:auto auto;justify-content:start}
+}
 
-  .device-phone {
-    position: absolute; right: -8px; bottom: -40px; width: 46%; max-width: 190px;
-    background: var(--surface); border: 2px solid var(--fg); border-radius: 22px;
-    padding: 16px 14px; box-shadow: 0 14px 28px rgba(10, 20, 35, .2);
-  }
-  @media (max-width: 640px) {
-    .device-phone { position: static; width: 62%; max-width: 220px; margin: -24px auto 0; }
-  }
-  .device-phone .backup-head {
-    display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 14px;
-  }
-  .check-circle {
-    width: 38px; height: 38px; border-radius: 50%; background: var(--success); color: #fff;
-    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700;
-  }
-  .device-phone .status-label { font-size: .82rem; font-weight: 700; text-align: center; }
-  .phone-row { margin-bottom: 10px; }
-  .phone-row .k { display: block; font-size: .64rem; color: var(--muted); margin-bottom: 2px; }
-  .phone-row .v { display: block; font-size: .8rem; font-weight: 600; }
-  .phone-btn {
-    display: block; width: 100%; text-align: center; margin-top: 4px;
-    opacity: .78; cursor: default;
-  }
-  .demo-disclaimer { font-size: .72rem; color: var(--muted); font-style: italic; text-align: center; margin-top: 10px; }
+/* Footer */
+.foot{background:var(--wood);color:var(--wood-fg);border-top:3px solid var(--wood-line)}
+.foot .wrap{display:grid;gap:22px;padding-block:34px;align-items:center}
+.plaque{width:150px;border-radius:14px;overflow:hidden;border:1px solid var(--wood-line);background:#F2F2F2}
+.plaque img{width:100%;height:auto}
+.foot h3{font-size:1.1rem}
+.foot p{opacity:.85;max-width:52ch}
+.foot .mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;opacity:.7}
+@media(min-width:700px){.foot .wrap{grid-template-columns:auto 1fr;gap:34px}}
 
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 13px 22px; border-radius: 8px; font-weight: 700; font-size: .95rem;
-    text-decoration: none; border: 1px solid transparent; cursor: pointer;
-  }
-  .btn-primary { background: var(--accent); color: var(--accent-fg); }
-  .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  section { padding-block: 40px; }
-  .section-head { margin-bottom: 30px; max-width: 56ch; }
-  .section-head .eyebrow {
-    font-size: .76rem; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 10px;
-  }
-  .section-head h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
-  .section-head p { color: var(--muted); margin-top: 10px; }
-
-  .contact-row {
-    display: flex; align-items: stretch; gap: 20px; flex-wrap: wrap;
-  }
-  .group-badge { flex-shrink: 0; }
-  .group-badge img {
-    height: 140px; width: 140px; object-fit: contain;
-    background: #fff; border: 1px solid var(--border); border-radius: 10px;
-    padding: 10px;
-  }
-  .contact-row .contact-card { flex: 1; min-width: 260px; justify-content: center; }
-
-  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  @media (max-width: 1040px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) {
-    .pillars {
-      display: flex; grid-template-columns: unset; overflow-x: auto;
-      scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 6px;
-      margin-inline: -20px; padding-inline: 20px;
-    }
-    .pillars .card { flex: 0 0 85%; scroll-snap-align: start; }
-  }
-  .swipe-hint { display: none; font-size: .78rem; color: var(--muted); margin: -16px 0 16px; }
-  @media (max-width: 560px) { .swipe-hint { display: block; } }
-
-  .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0;
-  }
-  .card .kicker { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .card h3 { font-size: 1.18rem; }
-  .card p { color: var(--muted); margin: 0; font-size: .95rem; }
-
-  .systems-card { grid-column: 1 / -1; }
-  @media (max-width: 560px) { .systems-card { grid-column: auto; } }
-  .systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
-  @media (max-width: 640px) { .systems-grid { grid-template-columns: 1fr; } }
-
-  .sub-card {
-    border: 1px solid var(--border); border-radius: 10px; padding: 16px;
-    background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%);
-    min-width: 0;
-  }
-  .sub-card .sys-name { font-weight: 700; display: flex; align-items: baseline; gap: 8px; }
-  .sub-card .sys-name code { font-size: .85em; color: var(--accent); }
-  .sub-card p { color: var(--muted); font-size: .9rem; margin: 8px 0 0; }
-
-  .sub-card-iada { border-top: 3px solid var(--accent-2); padding-top: 14px; }
-  .iada-art { display: block; width: 100%; border-radius: 6px; }
-  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .chip {
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .78rem;
-    background: var(--mono-chip); border: 1px solid var(--border); color: var(--fg);
-    padding: 5px 10px; border-radius: 6px;
-  }
-  .chip b { color: var(--accent); }
-  .chip:first-child b { color: var(--accent-2); }
-
-  .contact-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 28px; display: flex; flex-direction: column; gap: 16px;
-  }
-  .email-row {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    background: var(--bg); border: 1px dashed var(--border); border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .email-row .mono { font-size: .98rem; }
-  .copy-btn {
-    border: 1px solid var(--border); background: transparent; color: var(--fg);
-    border-radius: 6px; padding: 6px 10px; font-size: .82rem; font-weight: 600; cursor: pointer;
-  }
-  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .copy-btn[data-copied="1"] { border-color: var(--accent); color: var(--accent); }
-
-  .booking-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 28px; display: flex; flex-direction: column; gap: 16px;
-  }
-  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 560px) { .booking-grid { grid-template-columns: 1fr; } }
-  .field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); font-weight: 600; }
-  .field input, .field select, .field textarea {
-    font: inherit; font-size: .95rem; color: var(--fg); background: var(--bg);
-    border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; resize: vertical;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus {
-    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
-  }
-  .field-note { font-size: .78rem; color: var(--muted); margin: 0; }
-  .booking-status { font-size: .85rem; color: var(--accent); font-weight: 600; margin: 0; }
-
-  footer {
-    border-top: 1px solid var(--border); padding-block: 24px; margin-top: 20px;
-    color: var(--muted); font-size: .85rem;
-  }
-  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  footer .tagline { font-size: .8rem; margin-top: 2px; }
-  footer strong { color: var(--fg); }
-
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  @media (prefers-reduced-motion: no-preference) {
-    .card, .sub-card { transition: border-color .15s ease; }
-  }
+/* Barra fija móvil */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+@media(min-width:900px){.sticky{display:none}body{padding-block-end:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
 </head>
 <body>
 
-<header class="site">
-  <div class="wrap bar">
-    <div class="brand">
-      <img class="logo" src="assets/logo-iada-wordmark.png" alt="iADA — Innovaciones DAM">
-      <div class="brand-text">
-        <span class="name">Innovaciones DAM</span>
-        <span class="tag mono">Sistema ADA ahora <span class="tag-ia">iA</span>DA</span>
-      </div>
-    </div>
-    <nav class="site-nav">
-      <a href="#servicios">Servicios</a>
-      <a href="#agendar">Agendar</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Innovaciones DAM, inicio">
+      <img src="assets/logo-iada.webp" alt="Logo iADA Sistema Administrativo" width="80" height="42">
+      <div><b>Innovaciones DAM</b><span>Sistema ADA · ahora iADA</span></div>
+    </a>
+    <nav aria-label="Principal"><a href="#servicios">Servicios</a><a href="#agendar">Agendar</a><a href="#contacto">Contacto</a></nav>
   </div>
 </header>
 
-<main class="wrap">
+<main id="inicio">
+  <!-- BLOQUE 1: HERO -->
   <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow">Digitalización · Automatización · Redes Sociales · Sistemas</div>
-        <h1>Deja de perder tiempo y dinero.</h1>
-        <p class="lead">
-          <strong>Ordenamos y automatizamos tu negocio</strong> con Inteligencia Artificial
-          y sistemas a la medida. Pasamos tus procesos de papel, planillas sueltas y
-          WhatsApp a flujos digitales, trazables y accesibles desde cualquier lugar, con
-          nuestro <code>Sistema iADA</code>.
-        </p>
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Digitalización · Automatización · Redes sociales · Sistemas</p>
+        <h1>Deja de perder tiempo y dinero. <em>Ordenamos y automatizamos tu negocio</em> con Inteligencia Artificial y sistemas a la medida.</h1>
+        <p class="sub">Pasamos tus procesos de planillas sueltas y WhatsApp a flujos digitales, trazables y accesibles desde cualquier lugar con nuestro <b>Sistema iADA</b>.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#agendar">Agendar una cita</a>
-          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+          <div class="btn-row">
+            <a class="btn btn-wa" data-wa target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg>Escribir por WhatsApp</a>
+            <a class="btn btn-ghost" href="#agendar">Agendar una cita</a>
+          </div>
+          <small>Respondemos tu mensaje y te decimos cómo aplicarlo a tu caso.</small>
         </div>
       </div>
-
-      <div class="hero-visual">
-        <div class="device-stage">
-          <div class="device-laptop">
-            <div class="device-bar">
-              <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
-              <span class="device-title">Sistema iADA · Reporte semanal</span>
-            </div>
-            <div class="device-screen">
-              <div class="stat-row">
-                <div class="stat-tile">
-                  <span class="num">128</span>
-                  <span class="label">Pedidos</span>
+      <div>
+        <div class="stage" role="img" aria-label="Ilustración del Sistema iADA en una laptop con un reporte automático y en un celular con App_Respaldo">
+          <div class="laptop">
+            <div class="lid"><div class="screen">
+              <div class="s-bar"><i></i><i></i><i></i><span>Sistema iADA · Reporte semanal</span></div>
+              <div class="s-body">
+                <div class="kpis">
+                  <div class="kpi"><small>Pedidos</small><b>128</b></div>
+                  <div class="kpi"><small>Por atender</small><b>7</b></div>
+                  <div class="kpi"><small>Tareas automáticas</small><b>342</b></div>
                 </div>
-                <div class="stat-tile">
-                  <span class="num">7</span>
-                  <span class="label">Por atender</span>
-                </div>
-                <div class="stat-tile">
-                  <span class="num">342</span>
-                  <span class="label">Tareas automáticas</span>
-                </div>
+                <div class="chart"><i style="height:42%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:92%"></i><i style="height:76%"></i></div>
+                <div class="s-foot">Generado automáticamente · lunes 7:00 a. m.</div>
               </div>
-              <div class="mini-chart" aria-hidden="true">
-                <span style="height:55%"></span>
-                <span style="height:70%"></span>
-                <span style="height:60%"></span>
-                <span style="height:85%"></span>
-                <span style="height:65%"></span>
-                <span class="hot" style="height:100%"></span>
-              </div>
-              <p class="panel-caption">Generado automáticamente · lunes 7:00 a. m.</p>
-            </div>
+            </div></div>
+            <div class="base"></div>
           </div>
-
-          <div class="device-phone">
-            <div class="backup-head">
-              <span class="check-circle" aria-hidden="true">&#10003;</span>
-              <span class="status-label">Respaldo completado</span>
-            </div>
-            <div class="phone-row">
-              <span class="k">Programado</span>
-              <span class="v">Todos los días, 2:00 a. m.</span>
-            </div>
-            <div class="phone-row">
-              <span class="k">Último respaldo</span>
-              <span class="v">Hoy</span>
-            </div>
-            <span class="btn btn-primary phone-btn" aria-hidden="true">Respaldar ahora</span>
-          </div>
+          <div class="phone"><div class="ph-screen">
+            <div class="ph-title">App_Respaldo</div>
+            <div class="ph-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+            <div class="ph-msg">Respaldo completado</div>
+            <div class="ph-row"><small>Programado</small>Todos los días, 2:00 a. m.</div>
+            <div class="ph-row"><small>Último respaldo</small>Hoy</div>
+            <div class="ph-btn">Respaldar ahora</div>
+          </div></div>
         </div>
-        <p class="demo-disclaimer">Ilustración con datos de ejemplo</p>
+        <p class="stage-note">Ilustración con datos de ejemplo</p>
       </div>
-    </div>
-
-    <p class="trust-line">
-      <strong>Más de 25 años en el mercado</strong> impulsando empresas del país.
-      Centenares de procesos automatizados con éxito.
-    </p>
-  </section>
-
-  <section id="servicios">
-    <div class="section-head">
-      <div class="eyebrow">Qué hacemos</div>
-      <h2>Cuatro frentes, un mismo objetivo</h2>
-      <p>Menos trabajo manual, información ordenada, más clientes y decisiones más rápidas.</p>
-    </div>
-
-    <p class="swipe-hint">Desliza para ver los cuatro servicios →</p>
-
-    <div class="pillars">
-      <article class="card">
-        <span class="kicker">01 — Procesos</span>
-        <h3>Digitalización</h3>
-        <p>
-          Pasamos tus procesos de papel, planillas sueltas y WhatsApp a flujos
-          digitales ordenados, trazables y accesibles desde cualquier lugar.
-        </p>
-      </article>
-
-      <article class="card">
-        <span class="kicker">02 — Tareas</span>
-        <h3>Automatización</h3>
-        <p>
-          Identificamos las tareas repetitivas de tu día a día y las
-          automatizamos: menos errores manuales y más horas para lo que de
-          verdad necesita tu atención.
-        </p>
-      </article>
-
-      <article class="card">
-        <span class="kicker">03 — Visibilidad</span>
-        <h3>Uso de las Redes Sociales</h3>
-        <p>
-          Organizamos tu presencia en redes para que más gente te encuentre:
-          contenido constante y bien enfocado para mejorar la demanda de tus
-          productos o servicios.
-        </p>
-      </article>
-
-      <article class="card systems-card">
-        <span class="kicker">04 — Plataforma</span>
-        <h3>Sistemas Informáticos</h3>
-        <p>
-          Diseñamos y mantenemos el sistema que necesita tu negocio para
-          operar. Dos capas, un mismo sistema:
-        </p>
-
-        <div class="systems-grid">
-          <div class="sub-card">
-            <div class="sys-name"><code>01</code> Sistema ADA</div>
-            <p>
-              Plataforma base de gestión: ordena la información y las
-              operaciones de tu negocio en un solo lugar.
-            </p>
-          </div>
-          <div class="sub-card sub-card-iada">
-            <img class="iada-art" src="assets/logo-iada.png" alt="iADA — Inteligencia Artificial ADA, Sistema Administrativo">
-            <p>La capa inteligente de ADA, con capacidades de IA sobre tus propios datos.</p>
-            <div class="chip-row">
-              <span class="chip"><b>RAG</b> — respuestas basadas en tus documentos</span>
-              <span class="chip"><b>Reportes Personalizados</b> — informes a medida y automáticos</span>
-              <span class="chip"><b>App_Respaldo</b> — administrador de respaldos programados de forma automática, configurable por el cliente</span>
-            </div>
-          </div>
-        </div>
-      </article>
     </div>
   </section>
 
-  <section id="agendar">
-    <div class="section-head">
-      <div class="eyebrow">Agenda</div>
-      <h2>Agenda una cita</h2>
-      <p>Elige cómo prefieres que te atendamos y te confirmamos el horario por WhatsApp.</p>
+  <!-- BLOQUE 2: AUTORIDAD -->
+  <section class="proof" aria-label="Trayectoria">
+    <div class="wrap">
+      <p><span>Más de 25 años en el mercado</span> impulsando empresas del país. Centenares de procesos automatizados con éxito.</p>
     </div>
-
-    <form class="booking-card" id="booking-form">
-      <div class="booking-grid">
-        <label class="field">
-          <span>Nombre</span>
-          <input type="text" id="bk-nombre" placeholder="Tu nombre" required>
-        </label>
-        <label class="field">
-          <span>Medio preferido</span>
-          <select id="bk-medio" required>
-            <option value="Llamada telefónica">Llamada telefónica</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Videollamada">Videollamada</option>
-          </select>
-        </label>
-        <label class="field">
-          <span>Fecha</span>
-          <input type="date" id="bk-fecha" required>
-        </label>
-        <label class="field">
-          <span>Hora</span>
-          <input type="time" id="bk-hora" required>
-        </label>
-      </div>
-      <label class="field">
-        <span>Motivo (opcional)</span>
-        <textarea id="bk-motivo" rows="2" placeholder="Cuéntanos brevemente qué necesitas"></textarea>
-      </label>
-      <button class="btn btn-primary" type="submit">Solicitar cita por WhatsApp</button>
-      <p class="booking-status" id="booking-status" hidden>Abrimos WhatsApp con tu solicitud — confírmala desde ahí.</p>
-      <p class="field-note">Esto abre WhatsApp con tu solicitud; te confirmamos la fecha y hora por ese medio, no es una reserva automática.</p>
-    </form>
   </section>
 
-  <section id="contacto">
-    <div class="section-head">
-      <div class="eyebrow">Hablemos</div>
-      <h2>¿Conversamos sobre tu negocio?</h2>
-      <p>Escríbenos y te contamos cómo aplicar esto a tu caso puntual.</p>
-    </div>
-
-    <div class="contact-row">
-      <div class="group-badge">
-        <img src="assets/logo.jpg" alt="Innovaciones DAM">
+  <!-- BLOQUE 3: QUÉ HACEMOS -->
+  <section class="services" id="servicios">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Qué hacemos</p>
+        <h2>Cuatro frentes, un mismo objetivo</h2>
+        <p>Menos trabajo manual, información ordenada, más clientes y decisiones más rápidas.</p>
       </div>
+      <div class="rail" id="rail" tabindex="0" aria-label="Servicios, desliza para ver más">
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h4"/></svg></div>
+          <p class="eyebrow">Procesos</p>
+          <h3>Digitalización</h3>
+          <p>Pasamos tus procesos de papel a flujos digitales ordenados.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 0-14-5.3L4 9"/><path d="M4 4v5h5"/><path d="M4 12a8 8 0 0 0 14 5.3L20 15"/><path d="M20 20v-5h-5"/></svg></div>
+          <p class="eyebrow">Tareas</p>
+          <h3>Automatización</h3>
+          <p>Identificamos y automatizamos tareas repetitivas para reducir errores manuales.</p>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="5.5" r="2.6"/><circle cx="18" cy="18.5" r="2.6"/><path d="m8.3 10.8 7.4-4M8.3 13.2l7.4 4"/></svg></div>
+          <p class="eyebrow">Visibilidad</p>
+          <h3>Redes Sociales</h3>
+          <p>Organizamos tu presencia para mejorar la demanda de tus productos.</p>
+        </article>
+        <article class="card plat">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 4.5-9 4.5-9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg></div>
+          <p class="eyebrow">Plataforma</p>
+          <h3>Sistemas Informáticos</h3>
+          <p>Implementamos Sistema ADA con su capa de inteligencia iADA para gestión y reportes automáticos.</p>
+          <div class="chips"><span>RAG</span><span>Reportes</span><span>App_Respaldo</span></div>
+        </article>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      <p class="hint">Desliza para ver los cuatro servicios</p>
+    </div>
+  </section>
 
-      <div class="contact-card">
-        <div class="email-row">
-          <span class="mono" id="email-text">esistemaada@gmail.com</span>
-          <button class="copy-btn" id="copy-email" type="button">Copiar correo</button>
+  <!-- BLOQUE 3.5: AGENDAR CITA -->
+  <section class="agenda" id="agendar">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Agenda</p>
+        <h2>Agenda una cita</h2>
+        <p>Elige cómo prefieres que te atendamos y te confirmamos el horario por WhatsApp.</p>
+      </div>
+      <form class="booking" id="booking-form">
+        <div class="booking-grid">
+          <label class="field">
+            <span>Nombre</span>
+            <input type="text" id="bk-nombre" placeholder="Tu nombre" required>
+          </label>
+          <label class="field">
+            <span>Medio preferido</span>
+            <select id="bk-medio" required>
+              <option value="Llamada telefónica">Llamada telefónica</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Videollamada">Videollamada</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Fecha</span>
+            <input type="date" id="bk-fecha" required>
+          </label>
+          <label class="field">
+            <span>Hora</span>
+            <input type="time" id="bk-hora" required>
+          </label>
         </div>
-        <div class="cta-row" style="margin-top:0">
-          <a class="btn btn-primary" href="https://wa.me/584245673867?text=Hola%2C%20quiero%20consultar%20sobre%20sus%20servicios" target="_blank" rel="noopener">
-            Escribir por WhatsApp
-          </a>
-          <a class="btn btn-ghost" href="mailto:esistemaada@gmail.com?subject=Consulta%20desde%20la%20p%C3%A1gina">
-            Escribir correo
-          </a>
+        <label class="field">
+          <span>Motivo (opcional)</span>
+          <textarea id="bk-motivo" rows="2" placeholder="Cuéntanos brevemente qué necesitas"></textarea>
+        </label>
+        <button class="btn btn-wa" type="submit">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg>
+          Solicitar cita por WhatsApp
+        </button>
+        <p class="booking-status" id="booking-status" hidden>Abrimos WhatsApp con tu solicitud — confírmala desde ahí.</p>
+        <p class="field-note">Esto abre WhatsApp con tu solicitud; te confirmamos la fecha y hora por ese medio, no es una reserva automática.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4: CIERRE -->
+  <section class="close" id="contacto">
+    <div class="wrap">
+      <div class="panel">
+        <p class="eyebrow" style="color:#BFE0FA">Hablemos</p>
+        <h2>¿Conversamos sobre tu negocio?</h2>
+        <p class="lead">Escríbenos hoy y hagamos un diagnóstico rápido (y sin costo) de los cuellos de botella de tu empresa para encontrar la mejor solución.</p>
+        <div class="btns">
+          <a class="btn btn-wa" data-wa target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg>Escribir por WhatsApp</a>
+          <a class="btn btn-ghost" href="mailto:esistemaada@gmail.com?subject=Diagn%C3%B3stico%20para%20mi%20negocio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Enviar un correo</a>
         </div>
+        <div class="mail"><code id="mail">esistemaada@gmail.com</code><button type="button" id="copy">Copiar correo</button></div>
       </div>
     </div>
   </section>
 </main>
 
-<footer>
+<!-- BLOQUE 5: FOOTER -->
+<footer class="foot">
   <div class="wrap">
+    <div class="plaque"><img src="assets/logo-madera.webp" alt="Logo en madera de Innovaciones DAM: Imaginación, Creación, Innovación" width="150" height="170"></div>
     <div>
-      <span>© <span id="year"></span> <strong>Innovaciones DAM</strong></span>
-      <div class="tagline">Soluciones integrales de tecnología y creatividad.</div>
+      <h3>Innovaciones DAM</h3>
+      <p>Soluciones integrales de tecnología y creatividad.</p>
+      <p class="mono" style="margin-top:14px">© <span id="year"></span> Innovaciones DAM · Sistema ADA · Sistema iADA</p>
     </div>
-    <span class="mono">Sistema ADA · Sistema iADA</span>
   </div>
 </footer>
 
+<div class="sticky"><a class="btn btn-wa btn-block" data-wa target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4Z"/></svg>Escribir por WhatsApp</a></div>
+
 <script>
-  (function () {
-    document.getElementById("year").textContent = new Date().getFullYear();
+/* Número de WhatsApp con código de país y sin signos (Venezuela: 58 + número sin el 0 inicial). */
+var WA_NUMBER = "584245673867";
+var WA_TEXT = "Hola, quiero un diagnóstico para mi negocio.";
+(function(){
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    var btn = document.getElementById("copy-email");
-    var email = document.getElementById("email-text").textContent.trim();
-    btn.addEventListener("click", function () {
-      function done() {
-        btn.textContent = "¡Copiado!";
-        btn.setAttribute("data-copied", "1");
-        setTimeout(function () {
-          btn.textContent = "Copiar correo";
-          btn.removeAttribute("data-copied");
-        }, 1800);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).then(done).catch(function () {
-          selectText();
-        });
-      } else {
-        selectText();
-      }
-      function selectText() {
-        var el = document.getElementById("email-text");
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-      }
-    });
+  var base = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_TEXT);
+  document.querySelectorAll("[data-wa]").forEach(function(a){ a.href = base; });
 
-    var fechaInput = document.getElementById("bk-fecha");
-    fechaInput.min = new Date().toISOString().slice(0, 10);
+  var copy = document.getElementById("copy"), mail = document.getElementById("mail");
+  copy.addEventListener("click", function(){
+    function ok(){ copy.textContent = "Copiado"; setTimeout(function(){ copy.textContent = "Copiar correo"; }, 1800); }
+    function fallback(){
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copy.textContent = "Selecciónalo y copia";
+    }
+    try { navigator.clipboard.writeText(mail.textContent).then(ok, fallback); } catch(e){ fallback(); }
+  });
 
-    var form = document.getElementById("booking-form");
-    var status = document.getElementById("booking-status");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var nombre = document.getElementById("bk-nombre").value.trim();
-      var medio = document.getElementById("bk-medio").value;
-      var fecha = document.getElementById("bk-fecha").value;
-      var hora = document.getElementById("bk-hora").value;
-      var motivo = document.getElementById("bk-motivo").value.trim();
+  var rail = document.getElementById("rail"), dots = document.querySelectorAll("#dots i");
+  function sync(){
+    var cards = rail.children, best = 0, min = 1e9;
+    for (var i = 0; i < cards.length; i++){
+      var d = Math.abs(cards[i].offsetLeft - rail.scrollLeft - 18);
+      if (d < min){ min = d; best = i; }
+    }
+    if (rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4) best = cards.length - 1;
+    dots.forEach(function(d, i){ d.classList.toggle("on", i === best); });
+  }
+  rail.addEventListener("scroll", sync, {passive:true});
 
-      var fechaFmt = fecha
-        ? new Date(fecha + "T00:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })
-        : "-";
+  var fechaInput = document.getElementById("bk-fecha");
+  fechaInput.min = new Date().toISOString().slice(0, 10);
 
-      var lineas = [
-        "Hola, quiero agendar una cita.",
-        "Nombre: " + nombre,
-        "Medio preferido: " + medio,
-        "Fecha: " + fechaFmt,
-        "Hora: " + (hora || "-"),
-        "Motivo: " + (motivo || "-")
-      ];
-      var mensaje = encodeURIComponent(lineas.join("\n"));
-      window.open("https://wa.me/584245673867?text=" + mensaje, "_blank", "noopener");
+  var form = document.getElementById("booking-form");
+  var status = document.getElementById("booking-status");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nombre = document.getElementById("bk-nombre").value.trim();
+    var medio = document.getElementById("bk-medio").value;
+    var fecha = document.getElementById("bk-fecha").value;
+    var hora = document.getElementById("bk-hora").value;
+    var motivo = document.getElementById("bk-motivo").value.trim();
 
-      status.hidden = false;
-    });
-  })();
+    var fechaFmt = fecha
+      ? new Date(fecha + "T00:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })
+      : "-";
+
+    var lineas = [
+      "Hola, quiero agendar una cita.",
+      "Nombre: " + nombre,
+      "Medio preferido: " + medio,
+      "Fecha: " + fechaFmt,
+      "Hora: " + (hora || "-"),
+      "Motivo: " + (motivo || "-")
+    ];
+    var mensaje = encodeURIComponent(lineas.join("\n"));
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + mensaje, "_blank", "noopener");
+
+    status.hidden = false;
+  });
+})();
 </script>
+
 </body>
 </html>

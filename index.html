@@ -113,42 +113,62 @@
   }
   .trust-line strong { color: var(--fg); }
 
-  .hero-visual { display: flex; flex-direction: column; gap: 14px; }
-  .panel-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 18px 20px;
+  .hero-visual { display: flex; flex-direction: column; }
+  .device-stage { position: relative; margin-bottom: 56px; }
+  @media (max-width: 640px) { .device-stage { margin-bottom: 14px; } }
+
+  .device-laptop {
+    background: var(--surface); border: 2px solid var(--fg); border-radius: 12px;
+    overflow: hidden; box-shadow: 0 16px 32px rgba(10, 20, 35, .14);
   }
-  .panel-title {
-    font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 14px;
+  .device-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px; border-bottom: 1px solid var(--border);
   }
+  .device-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+  .device-bar .device-title {
+    margin-left: 6px; font-size: .72rem; font-weight: 700; color: var(--muted);
+  }
+  .device-screen { padding: 16px 18px 18px; }
+
   .stat-row { display: flex; gap: 10px; }
   .stat-tile { flex: 1; text-align: center; min-width: 0; }
   .stat-tile .num {
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 1.4rem; font-weight: 700;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 1.3rem; font-weight: 700;
     font-variant-numeric: tabular-nums; color: var(--fg); display: block;
   }
-  .stat-tile .label { font-size: .68rem; color: var(--muted); margin-top: 2px; }
+  .stat-tile .label { font-size: .64rem; color: var(--muted); margin-top: 2px; }
+
+  .mini-chart { display: flex; align-items: flex-end; gap: 6px; height: 48px; margin-top: 16px; }
+  .mini-chart span { flex: 1; background: var(--accent); border-radius: 3px 3px 0 0; }
+  .mini-chart span.hot { background: var(--accent-2); }
+
   .panel-caption { font-size: .72rem; color: var(--muted); margin-top: 12px; }
 
-  .backup-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-  .backup-head h4 { font-size: .92rem; margin: 0; }
-  .status-pill {
-    font-size: .68rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
-    background: color-mix(in srgb, var(--success) 18%, transparent); color: var(--success);
+  .device-phone {
+    position: absolute; right: -8px; bottom: -40px; width: 46%; max-width: 190px;
+    background: var(--surface); border: 2px solid var(--fg); border-radius: 22px;
+    padding: 16px 14px; box-shadow: 0 14px 28px rgba(10, 20, 35, .2);
   }
-  .backup-row {
-    display: flex; justify-content: space-between; gap: 10px; font-size: .85rem;
-    padding-block: 7px; border-top: 1px solid var(--border);
+  @media (max-width: 640px) {
+    .device-phone { position: static; width: 62%; max-width: 220px; margin: -24px auto 0; }
   }
-  .backup-row:first-of-type { border-top: none; }
-  .backup-row .k { color: var(--muted); }
-  .backup-row .v { font-weight: 600; }
-  .backup-demo-btn {
-    margin-top: 12px; width: 100%; justify-content: center;
-    opacity: .72; cursor: default;
+  .device-phone .backup-head {
+    display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 14px;
   }
-  .demo-disclaimer { font-size: .72rem; color: var(--muted); font-style: italic; text-align: center; }
+  .check-circle {
+    width: 38px; height: 38px; border-radius: 50%; background: var(--success); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700;
+  }
+  .device-phone .status-label { font-size: .82rem; font-weight: 700; text-align: center; }
+  .phone-row { margin-bottom: 10px; }
+  .phone-row .k { display: block; font-size: .64rem; color: var(--muted); margin-bottom: 2px; }
+  .phone-row .v { display: block; font-size: .8rem; font-weight: 600; }
+  .phone-btn {
+    display: block; width: 100%; text-align: center; margin-top: 4px;
+    opacity: .78; cursor: default;
+  }
+  .demo-disclaimer { font-size: .72rem; color: var(--muted); font-style: italic; text-align: center; margin-top: 10px; }
 
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -313,39 +333,54 @@
       </div>
 
       <div class="hero-visual">
-        <div class="panel-card">
-          <div class="panel-title">Sistema iADA · Reporte semanal</div>
-          <div class="stat-row">
-            <div class="stat-tile">
-              <span class="num">128</span>
-              <span class="label">Pedidos</span>
+        <div class="device-stage">
+          <div class="device-laptop">
+            <div class="device-bar">
+              <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
+              <span class="device-title">Sistema iADA · Reporte semanal</span>
             </div>
-            <div class="stat-tile">
-              <span class="num">7</span>
-              <span class="label">Por atender</span>
-            </div>
-            <div class="stat-tile">
-              <span class="num">342</span>
-              <span class="label">Tareas automáticas</span>
+            <div class="device-screen">
+              <div class="stat-row">
+                <div class="stat-tile">
+                  <span class="num">128</span>
+                  <span class="label">Pedidos</span>
+                </div>
+                <div class="stat-tile">
+                  <span class="num">7</span>
+                  <span class="label">Por atender</span>
+                </div>
+                <div class="stat-tile">
+                  <span class="num">342</span>
+                  <span class="label">Tareas automáticas</span>
+                </div>
+              </div>
+              <div class="mini-chart" aria-hidden="true">
+                <span style="height:55%"></span>
+                <span style="height:70%"></span>
+                <span style="height:60%"></span>
+                <span style="height:85%"></span>
+                <span style="height:65%"></span>
+                <span class="hot" style="height:100%"></span>
+              </div>
+              <p class="panel-caption">Generado automáticamente · lunes 7:00 a. m.</p>
             </div>
           </div>
-          <p class="panel-caption">Generado automáticamente · lunes 7:00 a. m.</p>
-        </div>
 
-        <div class="panel-card">
-          <div class="backup-head">
-            <h4>App_Respaldo</h4>
-            <span class="status-pill">Respaldo completado</span>
+          <div class="device-phone">
+            <div class="backup-head">
+              <span class="check-circle" aria-hidden="true">&#10003;</span>
+              <span class="status-label">Respaldo completado</span>
+            </div>
+            <div class="phone-row">
+              <span class="k">Programado</span>
+              <span class="v">Todos los días, 2:00 a. m.</span>
+            </div>
+            <div class="phone-row">
+              <span class="k">Último respaldo</span>
+              <span class="v">Hoy</span>
+            </div>
+            <span class="btn btn-primary phone-btn" aria-hidden="true">Respaldar ahora</span>
           </div>
-          <div class="backup-row">
-            <span class="k">Programado</span>
-            <span class="v">Todos los días, 2:00 a. m.</span>
-          </div>
-          <div class="backup-row">
-            <span class="k">Último respaldo</span>
-            <span class="v">Hoy</span>
-          </div>
-          <span class="btn btn-ghost backup-demo-btn" aria-hidden="true">Respaldar ahora</span>
         </div>
         <p class="demo-disclaimer">Ilustración con datos de ejemplo</p>
       </div>

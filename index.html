@@ -21,6 +21,7 @@
     --accent: #1f4068;
     --accent-2: #9c3030;
     --accent-fg: #ffffff;
+    --success: #1f7a4d;
     --mono-chip: #eef1f5;
     color-scheme: light;
   }
@@ -34,6 +35,7 @@
       --accent: #6fa3d8;
       --accent-2: #e2776f;
       --accent-fg: #0b1420;
+      --success: #5fcf96;
       --mono-chip: #16293099;
       color-scheme: dark;
     }
@@ -47,6 +49,7 @@
     --accent: #6fa3d8;
     --accent-2: #e2776f;
     --accent-fg: #0b1420;
+    --success: #5fcf96;
     --mono-chip: #16293099;
     color-scheme: dark;
   }
@@ -93,14 +96,59 @@
   nav.site-nav a { color: var(--fg); text-decoration: none; font-size: .92rem; font-weight: 600; }
   nav.site-nav a:hover { color: var(--accent); }
 
-  .hero { padding-block: 72px 56px; }
+  .hero { padding-block: 72px 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
   .hero .eyebrow {
     font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
     color: var(--accent); font-weight: 700; margin-bottom: 14px;
   }
   .hero h1 { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 700; max-width: 18ch; }
   .hero p.lead { margin-top: 18px; max-width: 54ch; color: var(--muted); font-size: 1.08rem; }
+  .hero p.lead strong { color: var(--fg); }
   .hero .cta-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+  .trust-line {
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .92rem; max-width: 68ch;
+  }
+  .trust-line strong { color: var(--fg); }
+
+  .hero-visual { display: flex; flex-direction: column; gap: 14px; }
+  .panel-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .panel-title {
+    font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 14px;
+  }
+  .stat-row { display: flex; gap: 10px; }
+  .stat-tile { flex: 1; text-align: center; min-width: 0; }
+  .stat-tile .num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 1.4rem; font-weight: 700;
+    font-variant-numeric: tabular-nums; color: var(--fg); display: block;
+  }
+  .stat-tile .label { font-size: .68rem; color: var(--muted); margin-top: 2px; }
+  .panel-caption { font-size: .72rem; color: var(--muted); margin-top: 12px; }
+
+  .backup-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .backup-head h4 { font-size: .92rem; margin: 0; }
+  .status-pill {
+    font-size: .68rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+    background: color-mix(in srgb, var(--success) 18%, transparent); color: var(--success);
+  }
+  .backup-row {
+    display: flex; justify-content: space-between; gap: 10px; font-size: .85rem;
+    padding-block: 7px; border-top: 1px solid var(--border);
+  }
+  .backup-row:first-of-type { border-top: none; }
+  .backup-row .k { color: var(--muted); }
+  .backup-row .v { font-weight: 600; }
+  .backup-demo-btn {
+    margin-top: 12px; width: 100%; justify-content: center;
+    opacity: .72; cursor: default;
+  }
+  .demo-disclaimer { font-size: .72rem; color: var(--muted); font-style: italic; text-align: center; }
 
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -133,7 +181,16 @@
 
   .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   @media (max-width: 1040px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .pillars { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    .pillars {
+      display: flex; grid-template-columns: unset; overflow-x: auto;
+      scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 6px;
+      margin-inline: -20px; padding-inline: 20px;
+    }
+    .pillars .card { flex: 0 0 85%; scroll-snap-align: start; }
+  }
+  .swipe-hint { display: none; font-size: .78rem; color: var(--muted); margin: -16px 0 16px; }
+  @media (max-width: 560px) { .swipe-hint { display: block; } }
 
   .card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
@@ -185,11 +242,30 @@
   .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
   .copy-btn[data-copied="1"] { border-color: var(--accent); color: var(--accent); }
 
+  .booking-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .booking-grid { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 6px; font-size: .85rem; color: var(--muted); font-weight: 600; }
+  .field input, .field select, .field textarea {
+    font: inherit; font-size: .95rem; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; resize: vertical;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .field-note { font-size: .78rem; color: var(--muted); margin: 0; }
+  .booking-status { font-size: .85rem; color: var(--accent); font-weight: 600; margin: 0; }
+
   footer {
     border-top: 1px solid var(--border); padding-block: 24px; margin-top: 20px;
     color: var(--muted); font-size: .85rem;
   }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  footer .tagline { font-size: .8rem; margin-top: 2px; }
+  footer strong { color: var(--fg); }
 
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (prefers-reduced-motion: no-preference) {
@@ -212,6 +288,7 @@
     </div>
     <nav class="site-nav">
       <a href="#servicios">Servicios</a>
+      <a href="#agendar">Agendar</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -219,18 +296,65 @@
 
 <main class="wrap">
   <section class="hero">
-    <div class="eyebrow">Digitalización · Automatización · Redes Sociales · Sistemas</div>
-    <h1>Tecnología que ordena y hace crecer tu negocio.</h1>
-    <p class="lead">
-      En Innovaciones DAM digitalizamos procesos, automatizamos tareas repetitivas
-      y construimos los sistemas informáticos que sostienen tu operación —
-      incluido <code>Sistema ADA</code>, nuestra plataforma propia, y su capa
-      inteligente <code>iADA</code>.
-    </p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#contacto">Hablar sobre mi negocio</a>
-      <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Digitalización · Automatización · Redes Sociales · Sistemas</div>
+        <h1>Deja de perder tiempo y dinero.</h1>
+        <p class="lead">
+          <strong>Ordenamos y automatizamos tu negocio</strong> con Inteligencia Artificial
+          y sistemas a la medida. Pasamos tus procesos de papel, planillas sueltas y
+          WhatsApp a flujos digitales, trazables y accesibles desde cualquier lugar, con
+          nuestro <code>Sistema iADA</code>.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#agendar">Agendar una cita</a>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="panel-card">
+          <div class="panel-title">Sistema iADA · Reporte semanal</div>
+          <div class="stat-row">
+            <div class="stat-tile">
+              <span class="num">128</span>
+              <span class="label">Pedidos</span>
+            </div>
+            <div class="stat-tile">
+              <span class="num">7</span>
+              <span class="label">Por atender</span>
+            </div>
+            <div class="stat-tile">
+              <span class="num">342</span>
+              <span class="label">Tareas automáticas</span>
+            </div>
+          </div>
+          <p class="panel-caption">Generado automáticamente · lunes 7:00 a. m.</p>
+        </div>
+
+        <div class="panel-card">
+          <div class="backup-head">
+            <h4>App_Respaldo</h4>
+            <span class="status-pill">Respaldo completado</span>
+          </div>
+          <div class="backup-row">
+            <span class="k">Programado</span>
+            <span class="v">Todos los días, 2:00 a. m.</span>
+          </div>
+          <div class="backup-row">
+            <span class="k">Último respaldo</span>
+            <span class="v">Hoy</span>
+          </div>
+          <span class="btn btn-ghost backup-demo-btn" aria-hidden="true">Respaldar ahora</span>
+        </div>
+        <p class="demo-disclaimer">Ilustración con datos de ejemplo</p>
+      </div>
     </div>
+
+    <p class="trust-line">
+      <strong>Más de 25 años en el mercado</strong> impulsando empresas del país.
+      Centenares de procesos automatizados con éxito.
+    </p>
   </section>
 
   <section id="servicios">
@@ -239,6 +363,8 @@
       <h2>Cuatro frentes, un mismo objetivo</h2>
       <p>Menos trabajo manual, información ordenada, más clientes y decisiones más rápidas.</p>
     </div>
+
+    <p class="swipe-hint">Desliza para ver los cuatro servicios →</p>
 
     <div class="pillars">
       <article class="card">
@@ -300,6 +426,46 @@
     </div>
   </section>
 
+  <section id="agendar">
+    <div class="section-head">
+      <div class="eyebrow">Agenda</div>
+      <h2>Agenda una cita</h2>
+      <p>Elige cómo prefieres que te atendamos y te confirmamos el horario por WhatsApp.</p>
+    </div>
+
+    <form class="booking-card" id="booking-form">
+      <div class="booking-grid">
+        <label class="field">
+          <span>Nombre</span>
+          <input type="text" id="bk-nombre" placeholder="Tu nombre" required>
+        </label>
+        <label class="field">
+          <span>Medio preferido</span>
+          <select id="bk-medio" required>
+            <option value="Llamada telefónica">Llamada telefónica</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Videollamada">Videollamada</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Fecha</span>
+          <input type="date" id="bk-fecha" required>
+        </label>
+        <label class="field">
+          <span>Hora</span>
+          <input type="time" id="bk-hora" required>
+        </label>
+      </div>
+      <label class="field">
+        <span>Motivo (opcional)</span>
+        <textarea id="bk-motivo" rows="2" placeholder="Cuéntanos brevemente qué necesitas"></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Solicitar cita por WhatsApp</button>
+      <p class="booking-status" id="booking-status" hidden>Abrimos WhatsApp con tu solicitud — confírmala desde ahí.</p>
+      <p class="field-note">Esto abre WhatsApp con tu solicitud; te confirmamos la fecha y hora por ese medio, no es una reserva automática.</p>
+    </form>
+  </section>
+
   <section id="contacto">
     <div class="section-head">
       <div class="eyebrow">Hablemos</div>
@@ -332,7 +498,10 @@
 
 <footer>
   <div class="wrap">
-    <span>© <span id="year"></span> Innovaciones DAM</span>
+    <div>
+      <span>© <span id="year"></span> <strong>Innovaciones DAM</strong></span>
+      <div class="tagline">Soluciones integrales de tecnología y creatividad.</div>
+    </div>
     <span class="mono">Sistema ADA · Sistema iADA</span>
   </div>
 </footer>
@@ -367,6 +536,37 @@
         sel.removeAllRanges();
         sel.addRange(range);
       }
+    });
+
+    var fechaInput = document.getElementById("bk-fecha");
+    fechaInput.min = new Date().toISOString().slice(0, 10);
+
+    var form = document.getElementById("booking-form");
+    var status = document.getElementById("booking-status");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var nombre = document.getElementById("bk-nombre").value.trim();
+      var medio = document.getElementById("bk-medio").value;
+      var fecha = document.getElementById("bk-fecha").value;
+      var hora = document.getElementById("bk-hora").value;
+      var motivo = document.getElementById("bk-motivo").value.trim();
+
+      var fechaFmt = fecha
+        ? new Date(fecha + "T00:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })
+        : "-";
+
+      var lineas = [
+        "Hola, quiero agendar una cita.",
+        "Nombre: " + nombre,
+        "Medio preferido: " + medio,
+        "Fecha: " + fechaFmt,
+        "Hora: " + (hora || "-"),
+        "Motivo: " + (motivo || "-")
+      ];
+      var mensaje = encodeURIComponent(lineas.join("\n"));
+      window.open("https://wa.me/584245673867?text=" + mensaje, "_blank", "noopener");
+
+      status.hidden = false;
     });
   })();
 </script>

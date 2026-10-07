@@ -13,11 +13,14 @@ clientes vean la oferta de servicios y puedan contactar por WhatsApp o correo.
 
 Cuando el usuario diga **"respaldo"**, hacerlo **sin pedir confirmación**:
 
-1. **Git** — `git add` solo los archivos tocados de la página (nunca tokens ni
+1. **Versión** — si `index.html` tiene cambios, actualizar `APP_VERSION` (en el
+   `<script>`) con la fecha y hora real (`date "+%d%m%Y-%H:%M"`), formato
+   `DDMMAAAA-HH:MM`. Siempre, en cada respaldo que toque `index.html`.
+2. **Git** — `git add` solo los archivos tocados de la página (nunca tokens ni
    credenciales); `git commit` con mensaje descriptivo en español, terminando con
    `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`.
-2. **GitHub** — `git push` a `main` del repo `esistemaada-web/innovaciones-dam-web`.
-3. **Vercel** — el proyecto está conectado al repo, así que el push dispara el
+3. **GitHub** — `git push` a `main` del repo `esistemaada-web/innovaciones-dam-web`.
+4. **Vercel** — el proyecto está conectado al repo, así que el push dispara el
    redeploy solo; no hace falta ejecutar nada manual. Avisar al usuario que
    revise `https://innovaciones-dam-web.vercel.app/` en 1-2 minutos para
    confirmar que tomó los cambios. Si el build de Vercel falla, avisar.
@@ -34,7 +37,6 @@ forzar (nada de `push --force` sin permiso explícito).
   `mailto:` en `index.html` y este archivo.
 - El usuario escribe en español → responder en español.
 - Dominio de producción en Vercel: `innovaciones-dam-web.vercel.app`.
-- **`APP_VERSION`**: constante en el `<script>` al final de `index.html`, formato
-  `DDMMAAAA-HH:MM`, tomada siempre de la hora real (comando `date`, nunca
-  estimada). Se muestra en el footer. Subirla en CADA edición de `index.html`,
-  antes de terminar / antes de cada "respaldo".
+- **`APP_VERSION`**: constante en el `<script>` al final de `index.html`, se
+  muestra en el footer. Se actualiza automáticamente en cada "respaldo" (ver
+  arriba) — nunca estimada, siempre con la hora real.

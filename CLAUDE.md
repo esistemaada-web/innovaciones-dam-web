@@ -34,3 +34,7 @@ forzar (nada de `push --force` sin permiso explícito).
   `mailto:` en `index.html` y este archivo.
 - El usuario escribe en español → responder en español.
 - Dominio de producción en Vercel: `innovaciones-dam-web.vercel.app`.
+- **`APP_VERSION`**: constante en el `<script>` al final de `index.html`, formato
+  `DDMMAAAA-HH:MM`, tomada siempre de la hora real (comando `date`, nunca
+  estimada). Se muestra en el footer. Subirla en CADA edición de `index.html`,
+  antes de terminar / antes de cada "respaldo".

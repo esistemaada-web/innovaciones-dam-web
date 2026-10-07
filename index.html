@@ -32,6 +32,8 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media(max-width:640px){ html{scroll-padding-top:calc(124px + env(safe-area-inset-top,0px))} }
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:0;padding-block-end:84px}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -471,7 +473,7 @@ p{margin:0}
 var WA_NUMBER = "584245673867";
 var WA_TEXT = "Hola, quiero un diagnóstico para mi negocio.";
 /* Versión: fecha y hora real del último commit, formato DDMMAAAA-HH:MM. Actualizar en cada cambio. */
-var APP_VERSION = "07102026-11:15";
+var APP_VERSION = "07102026-11:22";
 (function(){
   document.getElementById("year").textContent = new Date().getFullYear();
   document.getElementById("version").textContent = "v" + APP_VERSION;

@@ -97,12 +97,23 @@ p{margin:0}
 .chart{display:flex;align-items:flex-end;gap:1.3cqw;height:11cqw;border-bottom:1px solid var(--line);padding-inline:.5cqw}
 .chart i{flex:1;background:var(--blue);border-radius:.5cqw .5cqw 0 0;opacity:.88}
 .chart i:nth-child(6){background:var(--red);opacity:1}
+.motion-ok .chart i{transform:scaleY(0);transform-origin:bottom;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.motion-ok .chart i:nth-child(1){transition-delay:.05s}
+.motion-ok .chart i:nth-child(2){transition-delay:.1s}
+.motion-ok .chart i:nth-child(3){transition-delay:.15s}
+.motion-ok .chart i:nth-child(4){transition-delay:.2s}
+.motion-ok .chart i:nth-child(5){transition-delay:.25s}
+.motion-ok .chart i:nth-child(6){transition-delay:.3s}
+.motion-ok .chart i:nth-child(7){transition-delay:.35s}
+.motion-ok .stage.in-view .chart i{transform:scaleY(1)}
 .s-foot{font-family:var(--f-mono);font-size:.82em;color:var(--muted)}
 .base{height:1.8cqw;background:linear-gradient(#C9D2DC,#9AA7B6);border-radius:0 0 2.6cqw 2.6cqw;margin-inline:-3%}
 .phone{position:absolute;right:0;bottom:0;width:31%;background:#16202D;border-radius:4.4cqw;padding:1.1cqw;box-shadow:0 3cqw 6cqw -2cqw rgba(8,20,36,.55)}
 .ph-screen{background:var(--surface);border-radius:3.4cqw;aspect-ratio:9/18.5;padding:3cqw 2.4cqw;display:flex;flex-direction:column;gap:2cqw;font-size:max(6.5px,1.9cqw);line-height:1.25;color:var(--fg);overflow:hidden}
 .ph-title{font-family:var(--f-mono);font-weight:500;color:var(--muted);font-size:.95em;text-align:center}
 .ph-ok{display:grid;place-items:center;width:9cqw;height:9cqw;margin:1cqw auto 0;border-radius:50%;background:var(--wa);color:var(--wa-fg)}
+.motion-ok .ph-ok{transform:scale(0);opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1) .5s,opacity .3s ease .5s}
+.motion-ok .stage.in-view .ph-ok{transform:scale(1);opacity:1}
 .ph-ok svg{width:55%;height:55%}
 .ph-msg{text-align:center;font-weight:600;font-size:1.05em}
 .ph-row{background:var(--tint);border-radius:1.2cqw;padding:1.3cqw 1.6cqw}
@@ -244,9 +255,9 @@ p{margin:0}
               <div class="s-bar"><i></i><i></i><i></i><span>Sistema iADA · Reporte semanal</span></div>
               <div class="s-body">
                 <div class="kpis">
-                  <div class="kpi"><small>Pedidos</small><b>128</b></div>
-                  <div class="kpi"><small>Por atender</small><b>7</b></div>
-                  <div class="kpi"><small>Tareas automáticas</small><b>342</b></div>
+                  <div class="kpi"><small>Pedidos</small><b data-count="128">128</b></div>
+                  <div class="kpi"><small>Por atender</small><b data-count="7">7</b></div>
+                  <div class="kpi"><small>Tareas automáticas</small><b data-count="342">342</b></div>
                 </div>
                 <div class="chart"><i style="height:42%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:92%"></i><i style="height:76%"></i></div>
                 <div class="s-foot">Generado automáticamente · lunes 7:00 a. m.</div>
@@ -457,6 +468,42 @@ var WA_NUMBER = "584245673867";
 var WA_TEXT = "Hola, quiero un diagnóstico para mi negocio.";
 (function(){
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("motion-ok");
+
+    var stage = document.querySelector(".stage");
+    var counters = stage.querySelectorAll("[data-count]");
+    function animateCount(el){
+      var target = parseInt(el.getAttribute("data-count"), 10);
+      var duration = 900, startTime = null;
+      function step(ts){
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+    if ("IntersectionObserver" in window) {
+      var played = false;
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting && !played) {
+            played = true;
+            stage.classList.add("in-view");
+            counters.forEach(animateCount);
+            io.disconnect();
+          }
+        });
+      }, { threshold: .4 });
+      io.observe(stage);
+    } else {
+      stage.classList.add("in-view");
+    }
+  }
 
   var base = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_TEXT);
   document.querySelectorAll("[data-wa]").forEach(function(a){ a.href = base; });

@@ -151,6 +151,13 @@ p{margin:0}
 .card .ico svg{width:26px;height:26px}
 .card p{color:var(--muted)}
 .card.plat{box-shadow:0 0 0 2px var(--blue),0 10px 28px -8px rgba(26,16,37,.10)}
+@media(prefers-reduced-motion:no-preference){
+  .card-glow{animation:card-shimmer 2.6s ease-in-out infinite}
+  @keyframes card-shimmer{
+    0%,100%{box-shadow:0 1px 2px rgba(26,16,37,.04),0 10px 28px -8px rgba(26,16,37,.10)}
+    50%{box-shadow:0 1px 2px rgba(26,16,37,.04),0 10px 28px -8px rgba(26,16,37,.10),0 0 0 3px color-mix(in srgb,var(--blue) 45%,transparent),0 0 20px color-mix(in srgb,var(--blue) 35%,transparent)}
+  }
+}
 .dots{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:2px}
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
 .dots i.on{background:var(--blue);width:22px;border-radius:6px}
@@ -322,7 +329,7 @@ p{margin:0}
           <h3>Habla y pregúntale a tus datos usando la IA</h3>
           <p>Transforma tus datos en decisiones estratégicas. Con el Sistema ADA y el motor de iADA, ya no solo revisas reportes: conversas con tu información. Haz preguntas en lenguaje natural y obtén análisis de tus gráficas al instante.</p>
         </article>
-        <article class="card">
+        <article class="card card-glow">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h8M8 8h8M8 16h5"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>
           <p class="eyebrow">Experiencia</p>
           <h3>Asesoramientos Personalizados</h3>
@@ -475,7 +482,7 @@ p{margin:0}
 var WA_NUMBER = "584245673867";
 var WA_TEXT = "Hola, quiero un diagnóstico para mi negocio.";
 /* Versión: fecha y hora real del último commit, formato DDMMAAAA-HH:MM. Actualizar en cada cambio. */
-var APP_VERSION = "08102026-06:27";
+var APP_VERSION = "08102026-06:32";
 (function(){
   document.getElementById("year").textContent = new Date().getFullYear();
   document.getElementById("version").textContent = "v" + APP_VERSION;

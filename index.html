@@ -152,10 +152,10 @@ p{margin:0}
 .card p{color:var(--muted)}
 .card.plat{box-shadow:0 0 0 2px var(--blue),0 10px 28px -8px rgba(26,16,37,.10)}
 @media(prefers-reduced-motion:no-preference){
-  .card-glow{animation:card-shimmer 2.6s ease-in-out infinite}
+  .card-glow{animation:card-shimmer 1.8s ease-in-out infinite}
   @keyframes card-shimmer{
-    0%,100%{box-shadow:0 1px 2px rgba(26,16,37,.04),0 10px 28px -8px rgba(26,16,37,.10)}
-    50%{box-shadow:0 1px 2px rgba(26,16,37,.04),0 10px 28px -8px rgba(26,16,37,.10),0 0 0 3px color-mix(in srgb,var(--blue) 45%,transparent),0 0 20px color-mix(in srgb,var(--blue) 35%,transparent)}
+    0%,20%,100%{box-shadow:0 1px 2px rgba(26,16,37,.04),0 10px 28px -8px rgba(26,16,37,.10)}
+    60%{box-shadow:0 1px 2px rgba(26,16,37,.04),0 10px 28px -8px rgba(26,16,37,.10),0 0 0 3px rgba(255,159,67,.55),0 0 22px rgba(255,159,67,.45)}
   }
 }
 .dots{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:2px}
@@ -482,7 +482,7 @@ p{margin:0}
 var WA_NUMBER = "584245673867";
 var WA_TEXT = "Hola, quiero un diagnóstico para mi negocio.";
 /* Versión: fecha y hora real del último commit, formato DDMMAAAA-HH:MM. Actualizar en cada cambio. */
-var APP_VERSION = "08102026-06:46";
+var APP_VERSION = "08102026-06:53";
 (function(){
   document.getElementById("year").textContent = new Date().getFullYear();
   document.getElementById("version").textContent = "v" + APP_VERSION;
